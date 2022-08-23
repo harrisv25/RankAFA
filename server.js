@@ -79,8 +79,8 @@ app.get('/seed', async (req, res) => {
 //     });
 // })
 
-// Product.find({}, (err, allProducts) => {
-//     console.log(allProducts)
+// Gallery.find({}, (err, allArt) => {
+//     console.log(allArt)
 //     });
 
 app.use(express.static('./public'))
@@ -97,23 +97,22 @@ app.get("/rankAfa", (req,res) => {
     });
 })
 
+app.get('/rankAfa/add', (req, res) => {
+    res.render('add.ejs')
+})
 
-// app.get('/store/new', (req, res) => {
-//     res.render('new.ejs')
-// })
-
-// app.post('/store', (req, res) => {
-//     console.log(req.body)
-//     Product.create(req.body, (err, product) => {
-//         if(err) { 
-//           console.log(err)
-//         } else { 
-//           console.log(product)
-//         }
-//         // db.close()
-//     })
-//         res.redirect('/store')
-//   })
+app.post('/rankAfa', (req, res) => {
+    console.log(req.body)
+    Gallery.create(req.body, (err, art) => {
+        if(err) { 
+          console.log(err)
+        } else { 
+          console.log(art)
+        }
+        // db.close()
+    })
+        res.redirect('/rankAfa')
+  })
 
 
 // app.get("/store/:id", (req, res) => {
