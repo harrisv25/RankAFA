@@ -7,7 +7,9 @@ const mongoose = require('mongoose')
 const db = mongoose.connection
 const mongoURI = 'mongodb://localhost:27017/mongooseStore'
 
-const artPiece = require('./models/artPiece.js')
+const Gallery = require('./models/artPiece.js')
+
+// const Product = require('./models/products.js')
 
 const methodOverride = require('method-override');
 
@@ -19,37 +21,48 @@ db.on('error', (err) => console.log(err.message + ' is Mongod not running?'))
 db.on('connected', () => console.log('mongo connected: ', mongoURI))
 db.on('disconnected', () => console.log('mongo disconnected'))
 
-// app.get('/seed', async (req, res) => {
-//     const newProducts =
-//       [
-//         {
-//           name: 'Beans',
-//           description: 'A small pile of beans. Buy more beans for a big pile of beans.',
-//           img: 'https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2',
-//           price: 5,
-//           qty: 99
-//         }, {
-//           name: 'Bones',
-//           description: 'It\'s just a bag of bones.',
-//           img: 'http://bluelips.com/prod_images_large/bones1.jpg',
-//           price: 25,
-//           qty: 0
-//         }, {
-//           name: 'Bins',
-//           description: 'A stack of colorful bins for your beans and bones.',
-//           img: 'http://www.clipartbest.com/cliparts/9cz/rMM/9czrMMBcE.jpeg',
-//           price: 7000,
-//           qty: 1
-//         }
-//       ]
-  
-//     try {
-//       const seedItems = await Product.create(newProducts)
-//       res.send(seedItems)
-//     } catch (err) {
-//       res.send(err.message)
-//     }
-//   })
+app.get('/seed', async (req, res) => {
+    const newArt =
+      [
+        {
+            name: 'Real Goku',
+            authorName: 'Kimonasart from Kimonasart.deviantart.com',
+            description: 'Realistic Goku Depiction',
+            img: 'https://i.imgur.com/gDV3Z7Q.jpeg'
+        },
+        {
+            name: 'Gear 5 Luffy',
+            authorName: 'LeleoSpeedarts',
+            description: 'Luffy Gear 5 Anime Style',
+            img: 'https://i.imgur.com/hSrSj4h.jpeg'
+        }
+        // {
+        //   name: 'Beans',
+        //   description: 'A small pile of beans. Buy more beans for a big pile of beans.',
+        //   img: 'https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2',
+        //   price: 5,
+        //   qty: 99
+        // }, {
+        //   name: 'Bones',
+        //   description: 'It\'s just a bag of bones.',
+        //   img: 'http://bluelips.com/prod_images_large/bones1.jpg',
+        //   price: 25,
+        //   qty: 0
+        // }, {
+        //   name: 'Bins',
+        //   description: 'A stack of colorful bins for your beans and bones.',
+        //   img: 'http://www.clipartbest.com/cliparts/9cz/rMM/9czrMMBcE.jpeg',
+        //   price: 7000,
+        //   qty: 1
+        // }
+      ]
+    try {
+      const seedArt = await Gallery.create(newArt)
+      res.send(seedArt)
+    } catch (err) {
+      res.send(err.message)
+    }
+  })
   
 
 // db.on('open', () =>
@@ -58,10 +71,10 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 //     console.log( "added provided product data" )
 // }))
 
-// Product.collection.drop();
+// Gallery.collection.drop();
 
-// Product.find((err, products) => {
-//     products.forEach(element => {
+// Gallery.find((err, gallery) => {
+//     gallery.forEach(element => {
 //         console.log(element.name)
 //     });
 // })
@@ -76,13 +89,13 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use(methodOverride('_method'))
 
-// app.get("/store", (req,res) => {
-//     Product.find({}, (err, products)=>{
-//         res.render('index.ejs', {
-//             allProducts: products
-//         });
-//     });
-// })
+app.get("/rankAfa", (req,res) => {
+    Gallery.find({}, (err, art)=>{
+        res.render('index.ejs', {
+            allArt: art
+        });
+    });
+})
 
 
 // app.get('/store/new', (req, res) => {
