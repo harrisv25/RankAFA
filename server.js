@@ -155,11 +155,11 @@ app.get("/newest", (req,res) => {
 // })
 
 
-// app.put('/store/:id/buy', (req, res) => { 
-// 	Product.findByIdAndUpdate(req.params.id, {$inc: {qty: -1}}, (err, updatedModel)=>{
-//         res.redirect('/store')
-//     })
-// })
+app.put('/rankAfa/:id/vote', (req, res) => { 
+	Gallery.findByIdAndUpdate(req.params.id, {$inc: {rank : 1, reviewCount: 1}}, (err, updatedModel)=>{
+        res.redirect('/rankAfa')
+    })
+})
 
 // app.put('/store/:id', (req, res) => { 
 // 	Product.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel)=>{
