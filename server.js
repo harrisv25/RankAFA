@@ -107,14 +107,20 @@ app.get("/rankAfa/:id", (req, res) => {
     })
 })
 
-// Property.find(query).sort({"minimumPrice": -1}).exec()
-
 app.get("/topRanked", (req,res) => {
     Gallery.find({}, (err, art)=>{
         res.render('topRanked.ejs', {
             allArt: art
         });
     }).sort({'rank' : -1});
+})
+
+app.get("/newest", (req,res) => {
+    Gallery.find({}, (err, art)=>{
+        res.render('newest.ejs', {
+            allArt: art
+        });
+    }).sort({'createdAt' : -1});
 })
 
 
