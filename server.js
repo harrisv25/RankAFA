@@ -22,39 +22,25 @@ db.on('connected', () => console.log('mongo connected: ', mongoURI))
 db.on('disconnected', () => console.log('mongo disconnected'))
 
 app.get('/seed', async (req, res) => {
+    start = 0
     const newArt =
       [
         {
             name: 'Real Goku',
             authorName: 'Kimonasart from Kimonasart.deviantart.com',
             description: 'Realistic Goku Depiction',
-            img: 'https://i.imgur.com/gDV3Z7Q.jpeg'
+            img: 'https://i.imgur.com/gDV3Z7Q.jpeg',
+            rank: start,
+            reviewCount: start
         },
         {
             name: 'Gear 5 Luffy',
             authorName: 'LeleoSpeedarts',
             description: 'Luffy Gear 5 Anime Style',
-            img: 'https://i.imgur.com/hSrSj4h.jpeg'
+            img: 'https://i.imgur.com/hSrSj4h.jpeg',
+            rank: start,
+            reviewCount: start
         }
-        // {
-        //   name: 'Beans',
-        //   description: 'A small pile of beans. Buy more beans for a big pile of beans.',
-        //   img: 'https://cdn3.bigcommerce.com/s-a6pgxdjc7w/products/1075/images/967/416130__50605.1467418920.1280.1280.jpg?c=2',
-        //   price: 5,
-        //   qty: 99
-        // }, {
-        //   name: 'Bones',
-        //   description: 'It\'s just a bag of bones.',
-        //   img: 'http://bluelips.com/prod_images_large/bones1.jpg',
-        //   price: 25,
-        //   qty: 0
-        // }, {
-        //   name: 'Bins',
-        //   description: 'A stack of colorful bins for your beans and bones.',
-        //   img: 'http://www.clipartbest.com/cliparts/9cz/rMM/9czrMMBcE.jpeg',
-        //   price: 7000,
-        //   qty: 1
-        // }
       ]
     try {
       const seedArt = await Gallery.create(newArt)
@@ -79,9 +65,9 @@ app.get('/seed', async (req, res) => {
 //     });
 // })
 
-// Gallery.find({}, (err, allArt) => {
-//     console.log(allArt)
-//     });
+Gallery.find({}, (err, allArt) => {
+    console.log(allArt)
+    });
 
 app.use(express.static('./public'))
 app.use(express.json())
@@ -109,19 +95,18 @@ app.post('/rankAfa', (req, res) => {
         } else { 
           console.log(art)
         }
-        // db.close()
     })
         res.redirect('/rankAfa')
   })
 
 
-// app.get("/store/:id", (req, res) => {
-//     Product.find({_id: req.params.id}, (err, product)=>{
-//         res.render('show.ejs', {
-//             oneProduct: product[0],
-//         });
-//     })
-// })
+app.get("/rankAfa/:id", (req, res) => {
+    Gallery.find({_id: req.params.id}, (err, art)=>{
+        res.render('show.ejs', {
+            oneArt: art[0],
+        });
+    })
+})
 
 // app.delete('/store/:id', (req, res) => {
 //     Product.findByIdAndRemove(req.params.id, (err, data)=>{
