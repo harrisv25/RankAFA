@@ -1,3 +1,4 @@
+<%- include('./partials/header.ejs') %>
 <h1> Add a new Art entry!</h1>
 <form action="/rankAfa" method="POST">
     <input type="text" name="name" id="name"  placeholder="Name" required/>
@@ -8,3 +9,4 @@
     <input type="number" name="reviewCount" id="reviewCount"  placeholder='Number of Votes = 0' value=0 readonly/>
     <input type="Submit" value="Add New Art">
 </form>
+<%- include('./partials/footer.ejs') %>

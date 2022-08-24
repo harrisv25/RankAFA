@@ -22,7 +22,6 @@ db.on('connected', () => console.log('mongo connected: ', mongoURI))
 db.on('disconnected', () => console.log('mongo disconnected'))
 
 app.get('/seed', async (req, res) => {
-    start = 0
     const newArt =
       [
         {
@@ -30,16 +29,16 @@ app.get('/seed', async (req, res) => {
             authorName: 'Kimonasart from Kimonasart.deviantart.com',
             description: 'Realistic Goku Depiction',
             img: 'https://i.imgur.com/gDV3Z7Q.jpeg',
-            rank: start,
-            reviewCount: start
+            rank: 10,
+            reviewCount: 12
         },
         {
             name: 'Gear 5 Luffy',
             authorName: 'LeleoSpeedarts',
             description: 'Luffy Gear 5 Anime Style',
             img: 'https://i.imgur.com/hSrSj4h.jpeg',
-            rank: start,
-            reviewCount: start
+            rank: 14,
+            reviewCount: 2
         }
       ]
     try {
@@ -58,6 +57,7 @@ app.get('/seed', async (req, res) => {
 // }))
 
 // Gallery.collection.drop();
+
 
 // Gallery.find((err, gallery) => {
 //     gallery.forEach(element => {
@@ -96,7 +96,6 @@ app.post('/rankAfa', (req, res) => {
           console.log(art)
         }
     })
-        res.redirect('/rankAfa')
   })
 
 
@@ -107,6 +106,21 @@ app.get("/rankAfa/:id", (req, res) => {
         });
     })
 })
+
+// Property.find(query).sort({"minimumPrice": -1}).exec()
+
+app.get("/topRanked", (req,res) => {
+    Gallery.find({}, (err, art)=>{
+        res.render('topRanked.ejs', {
+            allArt: art
+        });
+    }).sort({'rank' : -1});
+})
+
+
+//I can allow for a user id field for each phote. The users can 
+//see a gallery of their own images and edit their own images. 
+
 
 // app.delete('/store/:id', (req, res) => {
 //     Product.findByIdAndRemove(req.params.id, (err, data)=>{
