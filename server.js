@@ -77,6 +77,14 @@ app.use(methodOverride('_method'))
 
 app.get("/rankAfa", (req,res) => {
     Gallery.find({}, (err, art)=>{
+        let num1 = Math.floor(Math.random() * art.length)
+        let num2 = Math.floor(Math.random() * art.length)
+        while (num1 === num2) {
+            num2 = Math.floor(Math.random() * art.length)
+        }
+        num1 = art[num1]
+        num2 = art[num2]
+        art = [num1, num2]
         res.render('index.ejs', {
             allArt: art
         });
