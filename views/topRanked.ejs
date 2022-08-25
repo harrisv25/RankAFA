@@ -1,18 +1,16 @@
 <%- include('./partials/header.ejs') %>
-    <ul class="gallery">
+    <ul class="topGallery">
         <% for (let i = 0; i < allArt.length; i++) { %>
         <li>
           <img class='thumbnail' src=<%=allArt[i].img %>>
           <div class="info">
-            <a href="/rankAfa/<%=allArt[i]._id%>">
+            <a href="/rankAfa/<%=allArt[i]._id%>" class="ImgName">
               <%=allArt[i].name%>
             </a>
-            <p>Price <%=allArt[i].price%></p>
-            <p>Quantity in Stock <%=allArt[i].qty%></p>
+            <p> Number of votes <%=allArt[i].rank%> </p>
             <form action="/rankAfa/<%=allArt[i]._id.toString()%>?_method=DELETE" method="POST">
               <input type="submit" value="DELETE"/>
             </form>
-            <a href="/rankAfa/<%=allArt[i]._id.toString()%>/edit">Edit</a>
           </div>
         </li>
         <% } %>

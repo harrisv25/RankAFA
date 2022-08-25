@@ -136,11 +136,11 @@ app.get("/newest", (req,res) => {
 //see a gallery of their own images and edit their own images. 
 
 
-// app.delete('/store/:id', (req, res) => {
-//     Product.findByIdAndRemove(req.params.id, (err, data)=>{
-//         res.redirect('/store') //redirect back to fruits index
-//     })
-// })
+app.delete('/rankAfa/:id', (req, res) => {
+    Gallery.findByIdAndRemove(req.params.id, (err, data)=>{
+        res.redirect('/rankAfa') //redirect back to fruits index
+    })
+})
 
 // app.get('/store/:id/edit', (req, res)=>{
 //     Product.findById(req.params.id, (err, foundProduct)=>{ //find the fruit
