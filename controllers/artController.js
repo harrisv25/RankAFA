@@ -53,13 +53,13 @@ router.get('/seed', async (req, res) => {
 
 
 // New
-router.get('/rankAfa/add', (req, res) => {
+router.get('/add', (req, res) => {
     res.render('add.ejs')
 })
 
 
 //Create
-router.post('/rankAfa', (req, res) => {
+router.post('/', (req, res) => {
   console.log(req.body)
   Gallery.create(req.body, (err, art) => {
       if(err) { 
@@ -72,7 +72,7 @@ router.post('/rankAfa', (req, res) => {
 
 
 //Show
-router.get("/rankAfa/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   Gallery.find({_id: req.params.id}, (err, art)=>{
       res.render('show.ejs', {
           oneArt: art[0],
@@ -80,25 +80,41 @@ router.get("/rankAfa/:id", (req, res) => {
   })
 })
 
-router.get("/topRanked", (req,res) => {
-  Gallery.find({}, (err, art)=>{
-      res.render('topRanked.ejs', {
-          allArt: art
-      });
-  }).sort({'rank' : -1});
-})
+// router.get("/topRanked", (req,res) => {
+//   Gallery.find({}, (err, art)=>{
+//       res.render('topRanked.ejs', {
+//           allArt: art
+//       });
+//   }).sort({'rank' : -1});
+// })
 
-router.get("/newest", (req,res) => {
-  Gallery.find({}, (err, art)=>{
-      res.render('newest.ejs', {
-          allArt: art
-      });
-  }).sort({'createdAt' : -1});
-})
+// router.get("/:org", (req,res) => {
+//   if (req.params.org === 'top') {
+//     Gallery.find({}, (err, art)=>{
+//       res.render('topRanked.ejs', {
+//           allArt: art
+//       });
+//     }).sort({'rank' : -1});
+//   } else if (req.params.org === 'newest') {
+//     Gallery.find({}, (err, art)=>{
+//       res.render('newest.ejs', {
+//           allArt: art
+//       });
+//     }).sort({'createdAt' : -1});
+//   }
+// })
+
+// router.get("/newest", (req,res) => {
+//   Gallery.find({}, (err, art)=>{
+//       res.render('newest.ejs', {
+//           allArt: art
+//       });
+//   }).sort({'createdAt' : -1});
+// })
 
 
 // DESTROY
-router.delete('/rankAfa/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   Gallery.findByIdAndRemove(req.params.id, (err, data)=>{
       res.redirect('/rankAfa') //redirect back to fruits index
   })
@@ -106,7 +122,7 @@ router.delete('/rankAfa/:id', (req, res) => {
 
 
 //Update (Limited to voting)
-router.put('/rankAfa/:id/vote', (req, res) => { 
+router.put('/:id/vote', (req, res) => { 
 	Gallery.findByIdAndUpdate(req.params.id, {$inc: {rank : 1, reviewCount: 1}}, (err, updatedModel)=>{
         res.redirect('/rankAfa')
     })
