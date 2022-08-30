@@ -4,9 +4,11 @@
         <li>
           <img class='thumbnail' src=<%=allArt[i].img %>>
           <div class="info">
-            <a href="/rankAfa/<%=allArt[i]._id%>">
+            <a href="/rankAfa/<%=allArt[i]._id%>" class="ImgName">
               <%=allArt[i].name%>
             </a>
+            <%=console.log(allArt[i].createdAt.toUTCString())%>
+            <p id="date"> Created on <%=allArt[i].createdAt.toUTCString()%> </p>
             <form action="/rankAfa/<%=allArt[i]._id.toString()%>?_method=DELETE" method="POST">
               <input type="submit" value="DELETE"/>
             </form>
