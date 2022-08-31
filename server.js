@@ -18,7 +18,9 @@ const port =process.env.port
 
 const mongoose = require('mongoose')
 const db = mongoose.connection
-const mongoURI = 'mongodb://localhost:27017/mongooseStore'
+// const mongoURI = 'mongodb://localhost:27017/mongooseStore'
+const mongoURI = process.env.MONGODB_URI
+
 
 const methodOverride = require('method-override');
 
