@@ -113,3 +113,9 @@ p {
     flex-wrap: wrap;
     align-self: center;
 }
+
+#view {
+    width: 600px;
+    margin: auto;
+    margin-top: 130px
+}

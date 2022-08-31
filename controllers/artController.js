@@ -80,43 +80,11 @@ router.get("/:id", (req, res) => {
   })
 })
 
-// router.get("/topRanked", (req,res) => {
-//   Gallery.find({}, (err, art)=>{
-//       res.render('topRanked.ejs', {
-//           allArt: art
-//       });
-//   }).sort({'rank' : -1});
-// })
-
-// router.get("/:org", (req,res) => {
-//   if (req.params.org === 'top') {
-//     Gallery.find({}, (err, art)=>{
-//       res.render('topRanked.ejs', {
-//           allArt: art
-//       });
-//     }).sort({'rank' : -1});
-//   } else if (req.params.org === 'newest') {
-//     Gallery.find({}, (err, art)=>{
-//       res.render('newest.ejs', {
-//           allArt: art
-//       });
-//     }).sort({'createdAt' : -1});
-//   }
-// })
-
-// router.get("/newest", (req,res) => {
-//   Gallery.find({}, (err, art)=>{
-//       res.render('newest.ejs', {
-//           allArt: art
-//       });
-//   }).sort({'createdAt' : -1});
-// })
-
 
 // DESTROY
 router.delete('/:id', (req, res) => {
   Gallery.findByIdAndRemove(req.params.id, (err, data)=>{
-      res.redirect('/rankAfa') //redirect back to fruits index
+      res.redirect('/rankAfa') 
   })
 })
 

@@ -1,26 +1,19 @@
 <%- include('./partials/header.ejs') %>
-
-    <h1><%=oneArt.name %></h1>
-    <div id="img_container">
-        <img class='main_img' src=<%=oneArt.img %>>
-    </div>
-    <div class="info_container">
-        <div id="buy">
-            <h2>Author: <%=oneArt.authorName%></h2>
-            <h2>Description: <%=oneArt.description%></h2>
-            <% if (oneArt.qty > 0) {%>
-                <form action="/rankAfa/<%=oneArt._id.toString()%>/buy?_method=PUT" method="POST">
-                    <button type="submit">Buy</button>
+    <div id="view">
+        <h1><%=oneArt.name %></h1>
+        <div id="img_container">
+            <img class='main_img' src=<%=oneArt.img %>>
+        </div>
+        <div id="view_container">
+            <div id="buy">
+                <h2>Author: <%=oneArt.authorName%></h2>
+                <h2>Description: <%=oneArt.description%></h2>
+            </div>
+            <div>
+                <form action="/rankAfa/<%=oneArt._id.toString()%>?_method=DELETE" method="POST">
+                    <input type="submit" value="DELETE"/>
                 </form>
-            <%} else {%>
-                <button id='oos'>Out of Stock</button>
-                <%}%>
-        </div>
-        <div>
-            <form action="/rankAfa/<%=oneArt._id.toString()%>?_method=DELETE" method="POST">
-                <input type="submit" value="DELETE"/>
-            </form>
+            </div>
         </div>
     </div>
-    <a href="/rankAfa/<%=oneArt._id.toString()%>/edit">Edit</a>
 <%- include('./partials/footer.ejs') %>
