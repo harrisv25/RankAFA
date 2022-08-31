@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 
-const Gallery = require('../models/artPiece.js')
+const Gallery = require('./models/artPiece.js')
 
 //Index
 router.get('/', async (req,res) => {
