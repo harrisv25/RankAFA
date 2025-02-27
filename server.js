@@ -3,22 +3,9 @@ const express = require('express')
 const app = express ()
 const port =process.env.port
 
-// var session = require('express-session')
-
-// app.use(session({
-// 	secret: 'keyboard cat',
-// 	resave: false, // https://www.npmjs.com/package/express-session#resave
-// 	saveUninitialized: false // https://www.npmjs.com/package/express-session#resave
-// }))
-
-// app.use((req, res, next) => {
-// 	res.locals.currentUser = req.session.currentUser
-// 	next()
-// })
-
 const mongoose = require('mongoose')
 const db = mongoose.connection
-// const mongoURI = 'mongodb://localhost:27017/mongooseStore'
+
 const mongoURI = process.env.MONGODB_URI
 
 
